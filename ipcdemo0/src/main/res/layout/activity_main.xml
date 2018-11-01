@@ -25,13 +25,31 @@
         android:scaleType="centerCrop"
         />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="sendANotification"
-        android:text="手动发送一个通知"
-        android:layout_gravity="center_horizontal"
-        />
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="sendANotification"
+            android:layout_weight="1"
+            android:text="手动发送一个通知"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="isAlways"
+            android:layout_weight="1"
+            android:text="一直显示通知/取消"
+            android:layout_gravity="center_horizontal"
+            />
+
+    </LinearLayout>
 
 
 </LinearLayout>

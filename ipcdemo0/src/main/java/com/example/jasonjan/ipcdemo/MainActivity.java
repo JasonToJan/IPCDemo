@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean mIsForegroundService = false;
     private static final String APP1PACKGENAME="com.example.ipcdemo1";
     private static final String APP1MAINACTIVITY="com.example.ipcdemo1.MainActivity";
+    private boolean isAways;//是否一直显示
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +59,13 @@ public class MainActivity extends AppCompatActivity {
             mMainService.stopForeground(true);
             mIsForegroundService = false;
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(mIsBind && mMainService != null && !mIsForegroundService){
-            mMainService.startForeground(NOTIFICATION_ID,getNotification());
-            mIsForegroundService = true;
+        SharedPreferences share=getSharedPreferences("app",Context.MODE_PRIVATE);
+        isAways=share.getBoolean("isAlways",false);
+        if(isAways){
+            if(mIsBind && mMainService != null && !mIsForegroundService){
+                mMainService.startForeground(NOTIFICATION_ID,getNotification());
+                mIsForegroundService = true;
+            }
         }
     }
 
@@ -72,6 +73,27 @@ public class MainActivity extends AppCompatActivity {
         if(mIsBind && mMainService != null && !mIsForegroundService){
             mMainService.startForeground(NOTIFICATION_ID,getNotification());
             mIsForegroundService = true;
+        }
+    }
+
+    public void isAlways(View v){
+        if(isAways){
+            isAways=false;
+            SharedPreferences sharedPreferences = getSharedPreferences("app", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isAlways",isAways);
+            editor.apply();
+
+        }else{
+            isAways=true;
+            SharedPreferences sharedPreferences = getSharedPreferences("app", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isAlways",isAways);
+            editor.apply();
+            if(mIsBind && mMainService != null && !mIsForegroundService){
+                mMainService.startForeground(NOTIFICATION_ID,getNotification());
+                mIsForegroundService = true;
+            }
         }
     }
 
