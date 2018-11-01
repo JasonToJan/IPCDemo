@@ -68,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void sendANotification(View v){
+        if(mIsBind && mMainService != null && !mIsForegroundService){
+            mMainService.startForeground(NOTIFICATION_ID,getNotification());
+            mIsForegroundService = true;
+        }
+    }
+
     /**
      * 产生一个前台通知
      * @return

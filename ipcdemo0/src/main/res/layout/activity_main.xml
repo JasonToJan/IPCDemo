@@ -25,4 +25,13 @@
         android:scaleType="centerCrop"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="sendANotification"
+        android:text="手动发送一个通知"
+        android:layout_gravity="center_horizontal"
+        />
+
+
 </LinearLayout>
