@@ -16,7 +16,6 @@
         android:text="APP(0)-感应值为0时展示的页面"
         />
 
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="500dp"
@@ -34,18 +33,9 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="sendANotification"
+            android:onClick="timerTask"
             android:layout_weight="1"
-            android:text="手动发送一个通知"
-            android:layout_gravity="center_horizontal"
-            />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="isAlways"
-            android:layout_weight="1"
-            android:text="一直显示通知/取消"
+            android:text="模拟执行"
             android:layout_gravity="center_horizontal"
             />
 
